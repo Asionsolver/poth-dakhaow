@@ -359,3 +359,84 @@ Example:
 {
   "error": "All fields are required"
 }
+
+
+## /captains/profile
+
+### Description
+This endpoint is used to get the profile of the authenticated captain.
+
+### Method
+`GET`
+
+### Headers
+- `Authorization`: Bearer token (required)
+
+### Responses
+
+#### Success
+ **Status Code**: `200 OK`
+- **Response Body**: A JSON object containing the captain profile.
+
+Example:
+```json
+{
+  "_id": "captain_id",
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "email": "jane.doe@example.com",
+  "vehicle": {
+    "color": "Red",
+    "plate": "XYZ123",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+#### Unauthorized
+- **Status Code**: `401 Unauthorized`
+- **Response Body**: A JSON object containing an error message.
+
+Example:
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+## /captains/logout
+
+### Description
+This endpoint is used to log out the authenticated captain.
+
+### Method
+`GET`
+
+### Headers
+- `Authorization`: Bearer token (required)
+
+### Responses
+
+#### Success
+ **Status Code**: `200 OK`
+- **Response Body**: A JSON object containing a success message.
+
+Example:
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
+#### Unauthorized
+- **Status Code**: `401 Unauthorized`
+- **Response Body**: A JSON object containing an error message.
+
+Example:
+```json
+{
+  "message": "Unauthorized"
+}
