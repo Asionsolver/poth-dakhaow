@@ -1,10 +1,9 @@
-
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { useState } from 'react'
 
 
-const UserLogin = () => {
+const CaptainLogin = () => {
     const [state, setState] = useState({
         email: '',
         password: ''
@@ -44,17 +43,19 @@ const UserLogin = () => {
                     <input type="password" name="password" value={password} onChange={inputHandler} className="bg-raffiaWhite mb-7 rounded px-4 py-2 w-full border text-lg placeholder:text-base" type="password" placeholder="password" required />
 
                     <button className="bg-black text-white w-full rounded px-4 py-2 font-medium" type="submit">Login</button>
-                    <div className='my-2'><p className='text-center'>New here? <Link to="/signup" className='text-ripeMango'>Create new Account</Link></p></div>
+                    <div className='my-2'><p className='text-center'>Join a fleet? <Link to="/captain-signup" className='text-ripeMango'>Register as a Captain</Link></p></div>
                 </form>
             </div>
             <div className='mt-5'>
 
 
-                <Link to='/captain-login' className="bg-jacarta flex items-center justify-center text-white w-full rounded px-4 py-2 font-medium" type="submit">Sign in as Captain</Link>
+                <Link to='/login' className="bg-ripeMango flex items-center justify-center text-white w-full rounded px-4 py-2 font-medium" type="submit">Sign in as User</Link>
 
             </div>
         </div>
     )
 }
 
-export default UserLogin
+
+
+export default CaptainLogin

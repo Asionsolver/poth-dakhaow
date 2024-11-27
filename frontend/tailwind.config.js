@@ -9,6 +9,11 @@ export default {
       // backgroundImage: {
       //   'home-pattern':"url('../frontend/src/assets/home.jpg')",
       // },
+      colors:{
+        raffiaWhite:"#eeee",
+        ripeMango:"#fec320",
+        jacarta:"#3f3d56"
+      },
     },
   },
   plugins: [],
