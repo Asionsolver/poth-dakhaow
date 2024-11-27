@@ -205,7 +205,7 @@ Example:
 ## /users/logout
 
 ### Description
-Logout the current user and blacklist the token provided in cookie or header.
+This endpoint is used to log out the authenticated user.
 
 ### Method
 `GET`
@@ -234,4 +234,128 @@ Example:
 ```json
 {
   "message": "Unauthorized"
+}
+```
+
+## /captains/register
+
+### Description
+This endpoint is used to register a new captain.
+
+### Method
+`POST`
+
+### Request Body
+The request body should be a JSON object with the following fields:
+- `fullname`: An object containing:
+  - `firstname`: A string with a minimum length of 3 characters (required)
+  - `lastname`: A string with a minimum length of 3 characters (optional)
+- `email`: A string with a valid email format (required)
+- `password`: A string with a minimum length of 6 characters (required)
+- `vehicle`: An object containing:
+  - `color`: A string with a minimum length of 3 characters (required)
+  - `plate`: A string with a minimum length of 3 characters (required)
+  - `capacity`: An integer with a minimum value of 1 (required)
+  - `vehicleType`: A string that must be one of `car`, `motorcycle`, or `auto` (required)
+
+Example:
+```json
+{
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "email": "jane.doe@example.com",
+  "password": "password123",
+  "vehicle": {
+    "color": "Red",
+    "plate": "XYZ123",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+### Responses
+
+#### Success
+ **Status Code**: `201 Created`
+- **Response Body**: A JSON object containing the generated authentication token and the captain object.
+
+Example:
+```json
+{
+  "token": "your_jwt_token",
+  "captain": {
+    "_id": "captain_id",
+    "fullname": {
+      "firstname": "Jane",
+      "lastname": "Doe"
+    },
+    "email": "jane.doe@example.com",
+    "vehicle": {
+      "color": "Red",
+      "plate": "XYZ123",
+      "capacity": 4,
+      "vehicleType": "car"
+    }
+  }
+}
+```
+
+#### Validation Errors
+- **Status Code**: `400 Bad Request`
+- **Response Body**: A JSON object containing an array of validation errors.
+
+Example:
+```json
+{
+  "errors": [
+    {
+      "msg": "First name must be at least 3 characters long",
+      "param": "fullname.firstname",
+      "location": "body"
+    },
+    {
+      "msg": "Please fill a valid email address",
+      "param": "email",
+      "location": "body"
+    },
+    {
+      "msg": "Password must be at least 6 characters long",
+      "param": "password",
+      "location": "body"
+    },
+    {
+      "msg": "Color must be at least 3 characters long",
+      "param": "vehicle.color",
+      "location": "body"
+    },
+    {
+      "msg": "Plate must be at least 3 characters long",
+      "param": "vehicle.plate",
+      "location": "body"
+    },
+    {
+      "msg": "Capacity must be at least 1",
+      "param": "vehicle.capacity",
+      "location": "body"
+    },
+    {
+      "msg": "Vehicle type must be car, motorcycle or auto",
+      "param": "vehicle.vehicleType",
+      "location": "body"
+    }
+  ]
+}
+```
+
+#### Missing Fields
+- **Status Code**: `400 Bad Request`
+- **Response Body**: A JSON object containing an error message.
+
+Example:
+```json
+{
+  "error": "All fields are required"
 }
