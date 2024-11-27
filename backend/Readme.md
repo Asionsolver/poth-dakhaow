@@ -26,12 +26,33 @@ Example:
   "email": "john.doe@example.com",
   "password": "password123"
 }
+```
 
+### Responses
+
+#### Success
+ **Status Code**: `201 Created`
+- **Response Body**: A JSON object containing the generated authentication token and the user object.
+
+Example:
+```json
+{
+  "token": "your_jwt_token",
+  "user": {
+    "_id": "user_id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
 ```
 
 #### Validation Errors
- * **Status Code** : 400 Bad Request
- * **Response Body**: A JSON object containing an array of validation errors.
+- **Status Code**: `400 Bad Request`
+- **Response Body**: A JSON object containing an array of validation errors.
+
 Example:
 ```json
 {
@@ -56,11 +77,87 @@ Example:
 ```
 
 #### Missing Fields
- * **Status Code** : 400 Bad Request
- * **Response Body**: A JSON object containing an error message.
+- **Status Code**: `400 Bad Request`
+- **Response Body**: A JSON object containing an error message.
+
 Example:
 ```json
 {
   "error": "All fields are required"
+}
+```
+
+## /users/login
+
+### Description
+This endpoint is used to log in an existing user.
+
+### Method
+`POST`
+
+### Request Body
+The request body should be a JSON object with the following fields:
+- `email`: A string with a valid email format (required)
+- `password`: A string with a minimum length of 6 characters (required)
+
+Example:
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+```
+
+### Responses
+
+#### Success
+ **Status Code**: `200 OK`
+- **Response Body**: A JSON object containing the generated authentication token and the user object.
+
+Example:
+```json
+{
+  "token": "your_jwt_token",
+  "user": {
+    "_id": "user_id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+```
+
+#### Validation Errors
+- **Status Code**: `400 Bad Request`
+- **Response Body**: A JSON object containing an array of validation errors.
+
+Example:
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid email",
+      "param": "email",
+      "location": "body"
+    },
+    {
+      "msg": "Password must be at least 6 characters long",
+      "param": "password",
+      "location": "body"
+    }
+  ]
+}
+```
+
+#### Invalid Credentials
+- **Status Code**: `401 Unauthorized`
+- **Response Body**: A JSON object containing an error message.
+
+Example:
+```json
+{
+  "message": "Invalid email or password"
 }
 ```
