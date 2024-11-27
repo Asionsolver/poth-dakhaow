@@ -205,7 +205,7 @@ Example:
 ## /users/logout
 
 ### Description
-This endpoint is used to log out the authenticated user.
+Logout the current user and blacklist the token provided in cookie or header.
 
 ### Method
 `GET`
