@@ -4,12 +4,16 @@ import { Home } from './pages/Home';
 import UserLogin from "./pages/UserLogin";
 
 import CaptainSignup from './pages/CaptainSignup';
-import { UserSignup } from './pages/UserSignup';
+
 import CaptainLogin from "./pages/CaptainLogin";
+import UserSignup from './pages/UserSignup';
+import { useContext } from "react";
+import { UserDataContext } from "./context/userContext";
 
 
 
 const App = () => {
+
   return (
     <div>
       <Routes>
